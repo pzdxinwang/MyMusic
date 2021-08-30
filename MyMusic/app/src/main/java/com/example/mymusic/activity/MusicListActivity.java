@@ -24,7 +24,12 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
 public class MusicListActivity extends BaseActivity implements
+=======
+public class
+MusicListActivity extends BaseActivity implements
+>>>>>>> d5c5d28 (sencond commit)
         HttpUtil.HttpCallbackListener, OnRefreshListener, OnLoadMoreListener {
     private List<MusicInfo> musicList;
     private MusicListAdapter musicListAdapter;

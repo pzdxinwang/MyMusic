@@ -31,6 +31,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Button btnSendCode;
     private Button btnRegister;
 
+<<<<<<< HEAD
+=======
+    private static int SEND_CAPTCHA = 0;
+    private static int REGISTER = 1;
+
+>>>>>>> d5c5d28 (sencond commit)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,12 +90,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         JsonObject params = new JsonObject();
         params.addProperty("phone", userTelephone);
         if (judgePhoneNums(userTelephone)) {
+<<<<<<< HEAD
             HttpUtil.get(Constant.SEND_CODE + "?phone=" + userTelephone, 0, null, this);
+=======
+            HttpUtil.get(Constant.SEND_CODE + "?phone=" + userTelephone, SEND_CAPTCHA, null, this);
+>>>>>>> d5c5d28 (sencond commit)
             ToastUtil.showShortToast(this, "正在发送验证码");
         } else ToastUtil.showShortToast(this, "验证码发送失败");
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5c5d28 (sencond commit)
     }
 
     /***
@@ -165,7 +178,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         params.addProperty("nickname", userName);
 //        HttpUtil.get(Constant.REGISTER + "?phone=" + userTelephone + "&password=" + Password +
 //                "&captcha=" + captcha + "&nickname=" + userName, 0, null, this);
+<<<<<<< HEAD
         HttpUtil.post(Constant.REGISTER, 0, params, null, false, this);
+=======
+        HttpUtil.post(Constant.REGISTER, REGISTER, params, null, false, this);
+>>>>>>> d5c5d28 (sencond commit)
     }
 
     /**
@@ -192,6 +209,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         try {
             JsonObject jsonObj = new JsonParser().parse(response).getAsJsonObject();
             runOnUiThread(() -> {
+<<<<<<< HEAD
                 Log.e("code",jsonObj.get("code").getAsString());
                 //查看API接口获取验证码返回的code是200,我很迷，发送验证码和注册成功的一样
                 if(jsonObj.get("code").getAsInt()==200){
@@ -216,6 +234,37 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     finish();
                 } else {
                     ToastUtil.showShortToast(com.example.mymusic.activity.RegisterActivity.this, jsonObj.get("code").getAsString());
+=======
+                Log.e("code", jsonObj.get("code").getAsString());
+                if (requestId == SEND_CAPTCHA) {
+                    if (jsonObj.get("code").getAsInt() == 200) {
+                        ToastUtil.showShortToast(this, "验证码发送成功");
+                    } else {
+                        ToastUtil.showShortToast(com.example.mymusic.activity.RegisterActivity.this, jsonObj.get("code").getAsString());
+                    }
+                }
+                if (requestId == REGISTER) {
+                    //昵称一样时
+                    if (jsonObj.get("code").getAsInt() == 505) {
+                        ToastUtil.showShortToast(this, "该昵称被占用，请更换");
+                    }
+                    if ((jsonObj.get("code").getAsInt()) == 503) {
+                        ToastUtil.showShortToast(this, "验证码错误");
+                    }
+                    if (jsonObj.get("code").getAsInt() == 400) {
+                        ToastUtil.showShortToast(this, "发送验证码超过限制");
+                    }
+                    //这个是注册成功时
+                    if (jsonObj.get("code").getAsInt() == 200) {
+                        ToastUtil.showShortToast(this, "注册成功");
+                        SharePreferencesUtil.putString(com.example.mymusic.activity.RegisterActivity.this, "phone", etUserTelephone.getText().toString());
+                        SharePreferencesUtil.putString(com.example.mymusic.activity.RegisterActivity.this, "password", etPassword.getText().toString());
+//                    startActivity(new Intent(com.example.mymusic.activity.RegisterActivity.this, LoginActivity.class));
+                        finish();
+                    } else {
+                        ToastUtil.showShortToast(com.example.mymusic.activity.RegisterActivity.this, jsonObj.get("code").getAsString());
+                    }
+>>>>>>> d5c5d28 (sencond commit)
                 }
             });
         } catch (Exception e) {
