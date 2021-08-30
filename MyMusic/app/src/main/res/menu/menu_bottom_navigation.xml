@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_homepage"
+        android:icon="@drawable/ic_wyy2"
+        android:orderInCategory="0"
+        android:title="发现" />
+    <item
+        android:id="@+id/item_search"
+        android:icon="@drawable/ic_search"
+        android:orderInCategory="1"
+        android:title="搜索" />
+
+    <item
+        android:id="@+id/item_personal"
+        android:icon="@drawable/ic_music"
+        android:orderInCategory="2"
+        android:title="我的" />
+</menu>
